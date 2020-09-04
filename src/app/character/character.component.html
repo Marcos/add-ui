@@ -1,0 +1,113 @@
+<div *ngIf="character">
+  <p><span>id: </span>{{character.id}}</p>
+  <p><span>nickname: </span>{{character.nickname}}</p>
+  <p><span>name: </span>{{character.name}}</p>
+  <p *ngIf="character.race"><span>race: </span>{{character.race.name}}</p>
+  <p *ngIf="character.mainClass"><span>class: </span>{{character.mainClass.name}}</p>
+  <p *ngIf="character.subClass"><span>subclass: </span>{{character.subClass.name}}</p>
+  <div *ngIf="character.spells">
+    <span>spells: </span>
+    <ul>
+      <li *ngFor="let spell of character.spells">
+        {{spell.name}}
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="character.equipments">
+    <span>spells: </span>
+    <ul>
+      <li *ngFor="let equipment of character.equipments">
+        {{equipment.name}}
+      </li>
+    </ul>
+  </div>
+
+</div>
+<div>
+
+  <p>
+    <mat-form-field>
+      <mat-label>Nickname</mat-label>
+      <input [(ngModel)]="character.nickname" matInput placeholder="Placeholder">
+      <mat-hint>This is your unique nickname and how we will identify your character</mat-hint>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field>
+      <mat-label>Legacy form field</mat-label>
+      <input [(ngModel)]="character.name" matInput placeholder="Placeholder">
+      <mat-hint>The name of your character</mat-hint>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field>
+      <mat-label>Race</mat-label>
+      <mat-select [(ngModel)]="character.race">
+        <mat-option *ngFor="let race of races" [value]="race">
+          {{race.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field>
+      <mat-label>Class</mat-label>
+      <mat-select
+        [(ngModel)]="character.mainClass"
+        (selectionChange)="onMainClassChange()"
+        >
+        <mat-option *ngFor="let class of mainClasses" [value]="class">
+          {{class.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field>
+      <mat-label>Sub Class</mat-label>
+      <mat-select
+        [(ngModel)]="character.subClass"
+        [disabled]="character.mainClass == null"
+        (selectionChange)="onSubClassChange()"
+        >
+        <mat-option *ngFor="let subClass of subClasses" [value]="subClass">
+          {{subClass.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field>
+      <mat-label>Spells</mat-label>
+      <mat-select
+        [(ngModel)]="character.spells"
+        [disabled]="character.subClass == null"
+        multiple
+        >
+        <mat-option *ngFor="let spell of spells" [value]="spell">
+          {{spell.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field>
+      <mat-label>Equipments</mat-label>
+      <mat-select
+        [(ngModel)]="character.equipments"
+        multiple
+        >
+        <mat-option *ngFor="let equipment of equipments" [value]="equipment">
+          {{equipment.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+</div>
