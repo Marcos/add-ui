@@ -1,10 +1,31 @@
-export const API_ENDPOINT = "https://radd-api.herokuapp.com"
+export const API_ENDPOINT = "http://localhost:8080"
 export interface ResultList {
   count: number
   results: any
 }
 export interface Attribute {
-  index: string
-  name: string
+  id: string
+  name?: string
   desc?: string
+}
+export interface Character {
+  nickname: string
+  name: string
+  age: Number
+  mainClass: Attribute
+  subClass: Attribute
+  race: Attribute
+  equipments: Attribute[]
+  spells: Attribute[]
+}
+
+export interface CharacterNicknameResponse {
+  nickname: string
+  exists: boolean
+}
+
+export interface CharacterReferenceResponse {
+  id: string
+  nickname: string
+  url: string
 }

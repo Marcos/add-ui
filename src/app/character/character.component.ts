@@ -9,6 +9,7 @@ import { MainClassService } from '../mainclass.service';
 import { SubClassService } from '../subclass.service';
 import { SpellService } from '../spell.service';
 import { EquipmentService } from '../equipment.service';
+import { CharacterService } from '../character.service';
 
 @Component({
   selector: 'app-character',
@@ -18,7 +19,7 @@ import { EquipmentService } from '../equipment.service';
 export class CharacterComponent implements OnInit {
 
   characterForm = new FormGroup({
-    nickname: new FormControl('', Validators.required),
+    nickname: new FormControl('', [Validators.required, Validators.pattern('[0-9a-zA-Z\-_]*')]),
     name: new FormControl('', Validators.required),
     age: new FormControl('', Validators.required),
     race: new FormControl(null, Validators.required),
@@ -29,6 +30,7 @@ export class CharacterComponent implements OnInit {
   });
 
   constructor(
+    private characterService: CharacterService,
     private raceService: RaceService,
     private mainClassService: MainClassService,
     private subClassService: SubClassService,
@@ -52,8 +54,23 @@ export class CharacterComponent implements OnInit {
   }
 
   onSubmit() {
-    // TODO: Use EventEmitter with form value
     console.warn(this.characterForm.value);
+    this.characterService.create(this.characterForm.value).subscribe({
+      next: data => console.log(data),
+      error: error => console.error('There was an error!', error)
+    })
+  }
+
+  verifyNicknameisUnique() {
+    const name = this.characterForm.get('nickname').value
+    console.log("Verifying name exists")
+    this.characterService.verifyNicknameExists(name)
+      .subscribe(response => {
+        if (response.exists) {
+          this.characterForm.get('nickname')
+            .setErrors({ 'existentNickname': true });
+        }
+      });
   }
 
   onMainClassChange(): void {
@@ -68,10 +85,8 @@ export class CharacterComponent implements OnInit {
     this.characterForm.controls['spells'].enable();
   }
 
-  allowedChars = new Set('0123456789'.split('').map(c => c.charCodeAt(0)));
-
   checkIsNumber(event: KeyboardEvent) {
-    if (event.keyCode > 31 && !this.allowedChars.has(event.keyCode)) {
+    if (event.keyCode < 0 || event.keyCode > 57) {
       event.preventDefault();
     }
   }

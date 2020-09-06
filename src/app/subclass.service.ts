@@ -13,7 +13,7 @@ export class SubClassService {
   private mainClassUrl = `${API_ENDPOINT}/subclasses`;
 
   getSubClassesByMainClass(mainClass:Attribute): Observable<ResultList> {
-    return this.http.get<ResultList>(`${this.mainClassUrl}/${mainClass.index}`)
+    return this.http.get<ResultList>(`${this.mainClassUrl}/${mainClass.id}`)
   }
 
 }

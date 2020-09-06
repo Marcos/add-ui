@@ -13,7 +13,7 @@ export class SpellService {
   private spellUrl = `${API_ENDPOINT}/spells`;
 
   getSpeels(mainClass:Attribute, subClass:Attribute): Observable<ResultList> {
-    return this.http.get<ResultList>(`${this.spellUrl}/${mainClass.index}/${subClass.index}`)
+    return this.http.get<ResultList>(`${this.spellUrl}/${mainClass.id}/${subClass.id}`)
   }
 
 }

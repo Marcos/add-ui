@@ -5,8 +5,12 @@
         <mat-label>Nickname</mat-label>
         <input
           formControlName="nickname"
+          (change)="verifyNicknameisUnique()"
           matInput placeholder="e.g. YourCoolNickname" />
-        <mat-hint>This is your unique nickname and how we will identify your character</mat-hint>
+        <mat-hint>This is your unique nickname and how we will identify your character. You can not use special chars or space for your nickname.</mat-hint>
+        <mat-error *ngIf="characterForm.get('nickname').errors?.existentNickname">
+          This nickname already exists, try another one.
+        </mat-error>
       </mat-form-field>
     </p>
 
