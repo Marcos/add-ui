@@ -1,5 +1,5 @@
 ## add-api
-This is the ui of the [app](https://add-ui.netlify.app/).
+This is the ui of the [D&D App](https://add-ui.netlify.app/).
 
 ## Requirements
 To build and run locally you will need to have docker and docker-compose installed.
