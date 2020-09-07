@@ -1,0 +1,7 @@
+version: '3'
+services:
+  add-ui:
+    build: .
+    ports:
+      - "4200:4200"
+    command: "ng serve --host 0.0.0.0 --port 4200"

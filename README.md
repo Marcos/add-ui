@@ -1,27 +1,21 @@
-# AddUi
+## add-api
+This is the ui of the [app](https://add-ui.netlify.app/).
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.0.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Requirements
+To build and run locally you will need to have docker and docker-compose installed.
 
 ## Build
+```shell script
+docker-compose build
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Run
+```shell script
+docker-compose run
+```
 
-## Running unit tests
+## Deploy
+This project is deployed on Netlify. To deploy a new version, you need to push a new commit to master.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Badges
+[![Netlify Status](https://api.netlify.com/api/v1/badges/edc19bc1-b513-42c5-bc35-48be21eca124/deploy-status)](https://app.netlify.com/sites/add-ui/deploys)
