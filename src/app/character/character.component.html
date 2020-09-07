@@ -1,118 +1,125 @@
-<div>
-  <form [formGroup]="characterForm" (ngSubmit)="onSubmit()" class="characterForm">
-    <p>
-      <mat-form-field class="fullWidth">
-        <mat-label>Nickname</mat-label>
-        <input
-          formControlName="nickname"
-          (change)="verifyNicknameisUnique()"
-          matInput placeholder="e.g. YourCoolNickname" />
-        <mat-hint>This is your unique nickname and how we will identify your character. You can not use special chars or space for your nickname.</mat-hint>
-        <mat-error *ngIf="characterForm.get('nickname').errors?.existentNickname">
-          This nickname already exists, try another one.
-        </mat-error>
-      </mat-form-field>
-    </p>
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar class="header-image"></div>
+    <mat-card-title>D&D App Creator</mat-card-title>
+    <mat-card-subtitle>Discover the habilities of D&D characters</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="characterForm" (ngSubmit)="onSubmit()" class="characterForm">
+      <p>
+        <mat-form-field class="fullWidth">
+          <mat-label>Nickname</mat-label>
+          <input
+            formControlName="nickname"
+            (change)="verifyNicknameisUnique()"
+            matInput placeholder="e.g. YourCoolNickname" />
+          <mat-hint>This is your unique nickname and how we will identify your character. You can not use special chars or space for your nickname.</mat-hint>
+          <mat-error *ngIf="characterForm.get('nickname').errors?.existentNickname">
+            This nickname already exists, try another one.
+          </mat-error>
+        </mat-form-field>
+      </p>
 
-    <p>
-      <mat-form-field class="fullWidth">
-        <mat-label>Name</mat-label>
-        <input
-          formControlName="name"
-          matInput placeholder="e.g. Gandalf" />
-        <mat-hint>The name of your character</mat-hint>
-      </mat-form-field>
-    </p>
+      <p>
+        <mat-form-field class="fullWidth">
+          <mat-label>Name</mat-label>
+          <input
+            formControlName="name"
+            matInput placeholder="e.g. Gandalf" />
+          <mat-hint>The name of your character</mat-hint>
+        </mat-form-field>
+      </p>
 
-    <p>
-      <mat-form-field>
-        <mat-label>Age</mat-label>
-        <input matInput
-          maxlength="10"
-          (keydown)="checkIsNumber($event)"
-          formControlName="age"
-          placeholder="e.g. 355"
-          />
-        <mat-hint>The age of your character</mat-hint>
-      </mat-form-field>
-    </p>
+      <p>
+        <mat-form-field>
+          <mat-label>Age</mat-label>
+          <input matInput
+            maxlength="10"
+            (keydown)="checkIsNumber($event)"
+            formControlName="age"
+            placeholder="e.g. 355"
+            />
+          <mat-hint>The age of your character</mat-hint>
+        </mat-form-field>
+      </p>
 
-    <p>
-      <mat-form-field class="fullWidth">
-        <mat-label>Race</mat-label>
-        <mat-select formControlName="race" >
-          <mat-option *ngFor="let race of raceList" [value]="race">
-            {{race.name}}
-          </mat-option>
-        </mat-select>
-        <mat-hint>Each race grants your character ability and skill bonuses as well as racial traits.</mat-hint>
-      </mat-form-field>
-    </p>
+      <p>
+        <mat-form-field class="fullWidth">
+          <mat-label>Race</mat-label>
+          <mat-select formControlName="race" >
+            <mat-option *ngFor="let race of raceList" [value]="race">
+              {{race.name}}
+            </mat-option>
+          </mat-select>
+          <mat-hint>Each race grants your character ability and skill bonuses as well as racial traits.</mat-hint>
+        </mat-form-field>
+      </p>
 
-    <p>
-      <mat-form-field class="fullWidth">
-        <mat-label>Class</mat-label>
-        <mat-select
-          formControlName="mainClass"
-          (selectionChange)="onMainClassChange()"
-          >
-          <mat-option *ngFor="let class of mainClassList" [value]="class">
-            {{class.name}}
-          </mat-option>
-        </mat-select>
-        <mat-hint>A character class is a fundamental part of the identity and nature of characters.</mat-hint>
-      </mat-form-field>
-    </p>
+      <p>
+        <mat-form-field class="fullWidth">
+          <mat-label>Class</mat-label>
+          <mat-select
+            formControlName="mainClass"
+            (selectionChange)="onMainClassChange()"
+            >
+            <mat-option *ngFor="let class of mainClassList" [value]="class">
+              {{class.name}}
+            </mat-option>
+          </mat-select>
+          <mat-hint>A character class is a fundamental part of the identity and nature of characters.</mat-hint>
+        </mat-form-field>
+      </p>
 
-    <p>
-      <mat-form-field class="fullWidth">
-        <mat-label>Sub Class</mat-label>
-        <mat-select
-          formControlName="subClass"
-          (selectionChange)="onSubClassChange()"
-          >
-          <mat-option *ngFor="let subClass of subClassList" [value]="subClass">
-            {{subClass.name}}
-          </mat-option>
-        </mat-select>
-        <mat-hint>Subclasses reflect the different paths a class may take as levels are gained.</mat-hint>
-      </mat-form-field>
-    </p>
+      <p>
+        <mat-form-field class="fullWidth">
+          <mat-label>Sub Class</mat-label>
+          <mat-select
+            formControlName="subClass"
+            (selectionChange)="onSubClassChange()"
+            >
+            <mat-option *ngFor="let subClass of subClassList" [value]="subClass">
+              {{subClass.name}}
+            </mat-option>
+          </mat-select>
+          <mat-hint>Subclasses reflect the different paths a class may take as levels are gained.</mat-hint>
+        </mat-form-field>
+      </p>
 
-    <p>
-      <mat-form-field class="fullWidth">
-        <mat-label>Spells</mat-label>
-        <mat-select
-          formControlName="spells"
-          multiple
-          >
-          <mat-option *ngFor="let spell of spellList" [value]="spell">
-            {{spell.name}}
-          </mat-option>
-        </mat-select>
-        <mat-hint>These are the spells of you can have based on your class and subclass.</mat-hint>
-      </mat-form-field>
-    </p>
+      <p>
+        <mat-form-field class="fullWidth">
+          <mat-label>Spells</mat-label>
+          <mat-select
+            formControlName="spells"
+            multiple
+            >
+            <mat-option *ngFor="let spell of spellList" [value]="spell">
+              {{spell.name}}
+            </mat-option>
+          </mat-select>
+          <mat-hint>These are the spells of you can have based on your class and subclass.</mat-hint>
+        </mat-form-field>
+      </p>
 
-    <p>
-      <mat-form-field class="fullWidth">
-        <mat-label>Equipments</mat-label>
-        <mat-select
-          formControlName="equipments"
-          multiple
-          >
-          <mat-option *ngFor="let equipment of equipmentList" [value]="equipment">
-            {{equipment.name}}
-          </mat-option>
-        </mat-select>
-        <mat-hint>These are the spells of you can have.</mat-hint>
-      </mat-form-field>
-    </p>
-    <p>
-      <input type="submit"
-      value="Create Character"
-      [disabled]="!characterForm.valid"
-      />
-    </p>
-  </form>
-</div>
+      <p>
+        <mat-form-field class="fullWidth">
+          <mat-label>Equipments</mat-label>
+          <mat-select
+            formControlName="equipments"
+            multiple
+            >
+            <mat-option *ngFor="let equipment of equipmentList" [value]="equipment">
+              {{equipment.name}}
+            </mat-option>
+          </mat-select>
+          <mat-hint>These are the spells of you can have.</mat-hint>
+        </mat-form-field>
+      </p>
+      <mat-divider></mat-divider>
+      <br>
+      <p>
+        <button type="submit" mat-raised-button color="primary" class="fullWidth"
+          [disabled]="!characterForm.valid">Create Character</button>
+      </p>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -3,6 +3,8 @@
   width: 100%;
 }
 
-.fullWidth {
-  width: 100%;
+.header-image {
+  background-image: url('src/assets/dnd_avatar.png');
+  background-size: cover;
 }
+

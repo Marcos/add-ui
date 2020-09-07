@@ -15,8 +15,8 @@ export interface Character {
   mainClass: Attribute
   subClass: Attribute
   race: Attribute
-  equipments: Attribute[]
-  spells: Attribute[]
+  equipments?: Attribute[]
+  spells?: Attribute[]
 }
 
 export interface CharacterNicknameResponse {

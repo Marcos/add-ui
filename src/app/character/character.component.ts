@@ -10,6 +10,7 @@ import { SubClassService } from '../subclass.service';
 import { SpellService } from '../spell.service';
 import { EquipmentService } from '../equipment.service';
 import { CharacterService } from '../character.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-character',
@@ -35,7 +36,8 @@ export class CharacterComponent implements OnInit {
     private mainClassService: MainClassService,
     private subClassService: SubClassService,
     private spellService: SpellService,
-    private equipmentService: EquipmentService
+    private equipmentService: EquipmentService,
+    private router: Router
   ) { }
 
   raceList: Attribute[]
@@ -56,7 +58,7 @@ export class CharacterComponent implements OnInit {
   onSubmit() {
     console.warn(this.characterForm.value);
     this.characterService.create(this.characterForm.value).subscribe({
-      next: data => console.log(data),
+      next: data => this.router.navigate(['', data.nickname]),
       error: error => console.error('There was an error!', error)
     })
   }

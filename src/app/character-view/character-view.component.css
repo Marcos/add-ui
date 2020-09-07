@@ -1,0 +1,5 @@
+
+.header-image {
+  background-image: url('src/assets/dnd_avatar.png');
+  background-size: cover;
+}

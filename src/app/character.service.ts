@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CharacterService {
-
   constructor(private http: HttpClient) { }
 
   private url = `${API_ENDPOINT}/characters`;
@@ -21,6 +20,8 @@ export class CharacterService {
     return this.http.post<CharacterReferenceResponse>(this.url, character)
   }
 
-
+  getByNickname(nickname: string): Observable<Character> {
+    return this.http.get<Character>(`${this.url}/${nickname}`)
+  }
 
 }

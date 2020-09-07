@@ -1,1 +1,49 @@
-<p>character-view works! {{nickname}}</p>
+<div *ngIf="character">
+  <mat-card>
+    <mat-card-header>
+      <div mat-card-avatar class="header-image"></div>
+      <mat-card-title>{{character.name}}</mat-card-title>
+      <mat-card-subtitle>{{character.race.name}} | {{character.mainClass.name}} | {{character.subClass.name}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="assets/card_image.jpg" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p><b>{{character.name}}</b> is a <b>{{character.race.name}}</b></p>
+      <p>{{character.race.description}} </p>
+      <mat-divider></mat-divider>
+      <br>
+
+      <p><b>{{character.name}}</b> belongs to the class of <b>{{character.mainClass.name}}</b></p>
+      <p>{{character.mainClass.description}}</p>
+      <mat-divider></mat-divider>
+      <br>
+
+      <p><b>{{character.name}}</b> is also part of the subclass of <b>{{character.subClass.name}}</b></p>
+      <p>{{character.subClass.description}}</p>
+      <mat-divider></mat-divider>
+      <br>
+
+      <mat-list *ngIf="character.spells && character.spells.length>0" role="list">
+        <b>Spells</b>
+        <mat-list-item *ngFor="let spell of character.spells" role="listitem">{{ spell.name }}</mat-list-item>
+        <mat-divider></mat-divider>
+        <br>
+      </mat-list>
+
+
+      <mat-list *ngIf="character.equipments && character.equipments.length>0" role="list">
+        <b>Equipments</b>
+        <mat-list-item *ngFor="let equipment of character.equipments" role="listitem">{{ equipment.name }}</mat-list-item>
+        <mat-divider></mat-divider>
+        <br>
+      </mat-list>
+
+
+      <p class="fullWidth center"><a routerLink="/" routerLinkActive="active">Create another character!</a></p>
+
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div *ngIf="!character">
+  <p>Sorry, but we haven't found any character with the nickname {{nickname}}</p>
+</div>
