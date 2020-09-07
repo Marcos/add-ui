@@ -13,9 +13,12 @@
             formControlName="nickname"
             (change)="verifyNicknameisUnique()"
             matInput placeholder="e.g. YourCoolNickname" />
-          <mat-hint>This is your unique nickname and how we will identify your character. You can not use special chars or space for your nickname.</mat-hint>
+          <mat-hint>This is your unique nickname.</mat-hint>
           <mat-error *ngIf="characterForm.get('nickname').errors?.existentNickname">
             This nickname already exists, try another one.
+          </mat-error>
+          <mat-error *ngIf="characterForm.get('nickname').errors?.pattern">
+            You can not use special chars or space for your nickname.
           </mat-error>
         </mat-form-field>
       </p>
@@ -120,6 +123,9 @@
         <button type="submit" mat-raised-button color="primary" class="fullWidth"
           [disabled]="!characterForm.valid">Create Character</button>
       </p>
+      <mat-error *ngIf="serverErrorMessage">
+        {{serverErrorMessage}}
+      </mat-error>
     </form>
   </mat-card-content>
 </mat-card>

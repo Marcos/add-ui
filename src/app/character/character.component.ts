@@ -45,6 +45,7 @@ export class CharacterComponent implements OnInit {
   subClassList: Attribute[]
   spellList: Attribute[]
   equipmentList: Attribute[]
+  serverErrorMessage: string
 
   ngOnInit(): void {
     this.raceService.getRaces()
@@ -56,10 +57,11 @@ export class CharacterComponent implements OnInit {
   }
 
   onSubmit() {
+    this.serverErrorMessage = null
     console.warn(this.characterForm.value);
     this.characterService.create(this.characterForm.value).subscribe({
       next: data => this.router.navigate(['', data.nickname]),
-      error: error => console.error('There was an error!', error)
+      error: error => this.serverErrorMessage = `Sorry, There was an error! ${error.message}`
     })
   }
 
