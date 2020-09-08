@@ -14,6 +14,8 @@ docker-compose build
 docker-compose up
 ```
 
+The application will be running at http:localhost:4200
+
 ## Deploy
 This project is deployed on Netlify. To deploy a new version, you need to push a new commit to master.
 
